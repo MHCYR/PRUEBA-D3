@@ -16,7 +16,7 @@ function dropdownSort() {
   renderChart();
 }
 
-function dropdownYear() {
+function changeYear() {
   const selectedOption = d3.select(this).node().value;
   if (selectedOption == "2010") {
     dataRender = 0;
@@ -27,7 +27,7 @@ function dropdownYear() {
 }
 
 // Mejorar para no hacer un if por cada caso
-function dropdownState() {
+function paintState() {
   const selectedOption = d3.select(this).node().value;
   if (selectedOption == "Veracruz") {
     d3.selectAll(".bars").style("fill", "aqua");
@@ -39,11 +39,12 @@ function dropdownState() {
     d3.selectAll(".bars").style("fill", "aqua");
     d3.select("#NL").style("fill", "red");
   }
+  idhStats(selectedOption);
 }
 
 //Recopila los datos de IDH del estado seleccionado
-function idhStats() {
-  const selectedOption = d3.select(this).node().value;
+function idhStats(node) {
+  const selectedOption = node;
   const average = (arr) => arr.reduce((p, c) => p + c, 0) / arr.length;
   const stateIDH = [];
   let averageIDH;
