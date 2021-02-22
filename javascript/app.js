@@ -22,7 +22,7 @@ renderDropdown(selectedState, "state");
 // Dropdowns events listeners
 d3.select("#selection").on("change", dropdownSort);
 d3.select("#year").on("change", dropdownYear);
-d3.select("#state").on("change", dropdownState);
+d3.select("#state").on("change", dropdownState).on("change", idhStats);
 
 //RENDER
 //Render cuando carga el DOM

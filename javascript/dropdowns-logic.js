@@ -26,6 +26,7 @@ function dropdownYear() {
   renderChart();
 }
 
+// Mejorar para no hacer un if por cada caso
 function dropdownState() {
   const selectedOption = d3.select(this).node().value;
   if (selectedOption == "Veracruz") {
@@ -38,4 +39,27 @@ function dropdownState() {
     d3.selectAll(".bars").style("fill", "aqua");
     d3.select("#NL").style("fill", "red");
   }
+}
+
+//Recopila los datos de IDH del estado seleccionado
+function idhStats() {
+  const selectedOption = d3.select(this).node().value;
+  const average = (arr) => arr.reduce((p, c) => p + c, 0) / arr.length;
+  const stateIDH = [];
+  let averageIDH;
+  let maxIDH;
+  let minIDH;
+  data.forEach((year) => {
+    year.forEach((d) => {
+      if (selectedOption == d.estado) {
+        stateIDH.push(d.idh);
+      }
+    });
+  });
+  averageIDH = average(stateIDH);
+  maxIDH = Math.max(...stateIDH);
+  minIDH = Math.min(...stateIDH);
+  d3.select("#averageIDH").text(averageIDH);
+  d3.select("#maxIDH").text(maxIDH);
+  d3.select("#minIDH").text(minIDH);
 }
