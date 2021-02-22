@@ -1,8 +1,8 @@
 //Creacion del dropdown
-function renderDropdown(options) {
+function renderDropdown(options, id) {
   d3.select("#dropdown")
     .append("select")
-    .attr("id", "selection")
+    .attr("id", id)
     .selectAll("option")
     .data(options)
     .enter()
@@ -11,15 +11,15 @@ function renderDropdown(options) {
     .text((d) => d);
 }
 
+//Render de la gráfica
 function renderChart() {
   const chartDiv = document.createElement("div");
   const showChart = document.getElementById("chartContainer");
 
   // ESCALAS
-  // ATENCION SE DEBE DE ARREGLAR EL DOMINO AL AÑO QUE SE SELECCIONE DEL DROPDOWN DE AÑOS
   const xScale = d3
     .scaleBand()
-    .domain(data[0].map((d) => d.estado))
+    .domain(data[dataRender].map((d) => d.estado))
     .rangeRound([0, chartWidth])
     .padding(0.1);
 
@@ -45,17 +45,16 @@ function renderChart() {
     .attr("transform", `translate(${margins.left}, ${margins.top})`);
 
   // Grupo por barra de svg
-  // SE DEBE ARREGLAR LA DATA A LA DATA DEL DD DE AÑOS
-  const g = mainG.selectAll("g").data(data[0]).enter().append("g");
+  const g = mainG.selectAll("g").data(data[dataRender]).enter().append("g");
 
   //Crear barras de la grafica
-  //SE DEBE DE ARREGLAS LA DATA
   g.append("rect")
     .attr("class", "bars")
     .attr("x", (d) => xScale(d.estado))
     .attr("y", (d) => yScale(d.idh))
     .attr("width", xScale.bandwidth())
     .attr("height", (d) => chartHeight - yScale(d.idh))
+    .attr("id", (d) => d.id)
     .append("text");
 
   mainG
@@ -67,7 +66,7 @@ function renderChart() {
 
   // Labels del eje y
   g.selectAll(".label")
-    .data(data[0], (data) => data.estado)
+    .data(data[dataRender], (data) => data.estado)
     .enter()
     .append("text")
     .text((data) => data.idh)
@@ -77,7 +76,6 @@ function renderChart() {
     .classed("label", true);
 
   // Re-render
-
   while (showChart.firstChild) {
     showChart.firstChild.remove();
   }

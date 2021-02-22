@@ -1,20 +1,29 @@
 let data = [data2010, data2011];
+let dataRender = 0;
 
 //MARGINS
-const margins = { top: 50, bottom: 100, left: 50, right: 50 };
+const margins = { top: 50, bottom: 20, left: 50, right: 50 };
 
 //ANCHO Y LARGO DEL GRAFICO
 const chartWidth = 600 - margins.left - margins.right;
 const chartHeight = 400 - margins.top - margins.bottom;
 
-// opciones del dropdown
+// DROPDOWNS
+// sort
+const sort = ["Alfabetico", "Ascendente", "Descendente"];
+renderDropdown(sort, "selection");
+//año
+let selectedYear = ["2010", "2011"];
+renderDropdown(selectedYear, "year");
+//estados
+const selectedState = data[dataRender].map((d) => d.estado);
+renderDropdown(selectedState, "state");
 
-const selectItems = ["Alfabetico", "Ascendente", "Descendente"];
-renderDropdown(selectItems);
-
-// Ordenar de acuerdo al DD
-//CORREGIR DATA DE ACUERDO AL AÑO SELECCIONADO
+// Dropdowns events listeners
 d3.select("#selection").on("change", dropdownSort);
+d3.select("#year").on("change", dropdownYear);
+d3.select("#state").on("change", dropdownState);
 
+//RENDER
 //Render cuando carga el DOM
 document.addEventListener("DOMContentLoaded", renderChart());
