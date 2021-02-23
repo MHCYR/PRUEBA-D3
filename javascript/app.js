@@ -2,14 +2,14 @@ let data = [data2010, data2011, data2012, data2013, data2014, data2015];
 let dataRender = 0;
 
 //MARGINS
-const margins = { top: 50, bottom: 80, left: 30, right: 30 };
+let margins = { top: 50, bottom: 80, left: 30, right: 30 };
 
 //ANCHO Y LARGO DEL GRAFICO
 let chartWidth =
   document.querySelector("#chartContainer").offsetWidth -
   margins.left -
   margins.right;
-const chartHeight = 500 - margins.top - margins.bottom;
+let chartHeight = 500 - margins.top - margins.bottom;
 
 // DROPDOWNS
 // sort
@@ -34,11 +34,18 @@ document.addEventListener("DOMContentLoaded", renderChart());
 //Render responsive, cambia cuando cambia el tamaño de la pantalla
 let chartDivWidth = document.querySelector("#chartContainer");
 const resize_ob = new ResizeObserver(() => {
+  let windowWidth = document.querySelector("main").clientWidth;
   chartWidth =
     document.querySelector("#chartContainer").offsetWidth -
     margins.left -
     margins.right;
-  renderChart();
+  if (windowWidth <= 480) {
+    margins = { top: 0, bottom: 10, left: 55, right: 15 };
+    chartHeight = 500 - margins.top - margins.bottom;
+    renderHorizontal();
+  } else {
+    renderChart();
+  }
 });
 
 resize_ob.observe(chartDivWidth);

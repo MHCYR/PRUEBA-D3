@@ -11,7 +11,7 @@ function renderDropdown(options, id) {
     .text((d) => d);
 }
 
-//Render de la gráfica
+// Render de la gráfica
 function renderChart() {
   const chartDiv = document.createElement("div");
   const showChart = document.getElementById("chartContainer");
@@ -63,15 +63,16 @@ function renderChart() {
     .call(xAxis)
     .attr("transform", `translate(0, ${chartHeight})`)
     .selectAll("text")
-    .attr("y", 10)
-    .attr("x", 0)
+    .attr("y", 0)
+    .attr("x", 6)
     .attr("transform", "rotate(45)")
     .style("text-anchor", "start");
 
   mainG.append("g").call(yAxis);
 
   // Etiquetas de las barras
-  g.selectAll(".label")
+  mainG
+    .selectAll(".label")
     .data(data[dataRender], (data) => data.estado)
     .enter()
     .append("text")
@@ -79,6 +80,66 @@ function renderChart() {
     .attr("x", (data) => xScale(data.estado) + xScale.bandwidth() / 2) // coloca el inicio del label a la mitad de la barra
     .attr("y", (data) => yScale(data.idh) - 10) // coloca el label 10px arriba de donde termina la barra
     .attr("text-anchor", "middle") //justifica el texto con la mitad de la barra
+    .classed("label", true)
+    .style("font-size", "10");
+
+  // Re-render
+  while (showChart.firstChild) {
+    showChart.firstChild.remove();
+  }
+  showChart.appendChild(chartDiv);
+}
+
+function renderHorizontal() {
+  const chartDiv = document.createElement("div");
+  const showChart = document.getElementById("chartContainer");
+
+  const xScale = d3.scaleLinear().domain([0, 1]).range([0, chartWidth]);
+  const yScale = d3
+    .scaleBand()
+    .domain(data[dataRender].map((d) => d.id))
+    .rangeRound([0, chartWidth])
+    .padding(0.1);
+
+  const xAxis = d3.axisTop().scale(xScale);
+  const yAxis = d3.axisLeft().scale(yScale);
+
+  //Crear SVG
+  const svg = d3
+    .select(chartDiv)
+    .append("svg")
+    .attr("width", chartWidth + margins.left + margins.right)
+    .attr("height", chartHeight + margins.top + margins.bottom);
+
+  const mainG = svg
+    .append("g")
+    .attr("transform", `translate(${margins.left}, ${margins.top})`);
+
+  const g = mainG.selectAll("g").data(data[dataRender]).enter().append("g");
+
+  //Crear barras de la grafica
+  g.append("rect")
+    .attr("class", "bars")
+    .attr("x", 0)
+    .attr("y", (d) => yScale(d.id))
+    .attr("width", (d) => xScale(d.idh))
+    .attr("height", yScale.bandwidth())
+    .attr("id", (d) => d.id)
+    .append("text");
+
+  //Axis
+  // mainG.append("g").call(xAxis);
+  mainG.append("g").call(yAxis);
+
+  // bar labels
+  mainG
+    .selectAll(".label")
+    .data(data[dataRender], (data) => data.estado)
+    .enter()
+    .append("text")
+    .text((data) => data.idh)
+    .attr("x", (data) => xScale(data.idh)) // coloca el inicio del label a la mitad de la barra
+    .attr("y", (data) => yScale(data.id) + yScale.bandwidth() - 2)
     .classed("label", true)
     .style("font-size", "10");
 
