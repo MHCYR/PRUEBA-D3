@@ -2,14 +2,14 @@ let data = [data2010, data2011, data2012, data2013, data2014, data2015];
 let dataRender = 0;
 
 //MARGINS
-const margins = { top: 50, bottom: 20, left: 30, right: 30 };
+const margins = { top: 50, bottom: 80, left: 30, right: 30 };
 
 //ANCHO Y LARGO DEL GRAFICO
 let chartWidth =
   document.querySelector("#chartContainer").offsetWidth -
   margins.left -
   margins.right;
-const chartHeight = 400 - margins.top - margins.bottom;
+const chartHeight = 500 - margins.top - margins.bottom;
 
 // DROPDOWNS
 // sort

@@ -51,7 +51,7 @@ function idhStats(node) {
       }
     });
   });
-  averageIDH = average(stateIDH);
+  averageIDH = average(stateIDH).toFixed(2);
   maxIDH = Math.max(...stateIDH);
   minIDH = Math.min(...stateIDH);
   d3.select("#averageIDH").text(averageIDH);

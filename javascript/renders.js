@@ -57,10 +57,16 @@ function renderChart() {
     .attr("id", (d) => d.id)
     .append("text");
 
+  // Etiquetas del los ejes
   mainG
     .append("g")
     .call(xAxis)
-    .attr("transform", `translate(0, ${chartHeight})`);
+    .attr("transform", `translate(0, ${chartHeight})`)
+    .selectAll("text")
+    .attr("y", 10)
+    .attr("x", 0)
+    .attr("transform", "rotate(45)")
+    .style("text-anchor", "start");
 
   mainG.append("g").call(yAxis);
 
@@ -73,10 +79,8 @@ function renderChart() {
     .attr("x", (data) => xScale(data.estado) + xScale.bandwidth() / 2) // coloca el inicio del label a la mitad de la barra
     .attr("y", (data) => yScale(data.idh) - 10) // coloca el label 10px arriba de donde termina la barra
     .attr("text-anchor", "middle") //justifica el texto con la mitad de la barra
-    .classed("label", true);
-
-  //Rotar labels eje x
-  d3.selectAll("tick").attr("transform", "rotate(70)");
+    .classed("label", true)
+    .style("font-size", "10");
 
   // Re-render
   while (showChart.firstChild) {
