@@ -18,27 +18,21 @@ function dropdownSort() {
 
 function changeYear() {
   const selectedOption = d3.select(this).node().value;
-  if (selectedOption == "2010") {
-    dataRender = 0;
-  } else if (selectedOption == "2011") {
-    dataRender = 1;
-  }
+  dataRender = selectedYear.indexOf(selectedOption);
   renderChart();
 }
 
 // Mejorar para no hacer un if por cada caso
 function paintState() {
   const selectedOption = d3.select(this).node().value;
-  if (selectedOption == "Veracruz") {
-    d3.selectAll(".bars").style("fill", "aqua");
-    d3.select("#VER").style("fill", "red");
-  } else if (selectedOption == "Aguascalientes") {
-    d3.selectAll(".bars").style("fill", "aqua");
-    d3.select("#AGS").style("fill", "red");
-  } else if (selectedOption == "Nuevo Leon") {
-    d3.selectAll(".bars").style("fill", "aqua");
-    d3.select("#NL").style("fill", "red");
-  }
+  let stateID;
+  data[dataRender].forEach((element) => {
+    if (element.estado == selectedOption) {
+      stateID = `#${element.id}`;
+    }
+  });
+  d3.selectAll(".bars").style("fill", "aqua");
+  d3.select(stateID).style("fill", "red");
   idhStats(selectedOption);
 }
 

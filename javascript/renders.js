@@ -64,7 +64,7 @@ function renderChart() {
 
   mainG.append("g").call(yAxis);
 
-  // Labels del eje y
+  // Etiquetas de las barras
   g.selectAll(".label")
     .data(data[dataRender], (data) => data.estado)
     .enter()
@@ -74,6 +74,9 @@ function renderChart() {
     .attr("y", (data) => yScale(data.idh) - 10) // coloca el label 10px arriba de donde termina la barra
     .attr("text-anchor", "middle") //justifica el texto con la mitad de la barra
     .classed("label", true);
+
+  //Rotar labels eje x
+  d3.selectAll("tick").attr("transform", "rotate(70)");
 
   // Re-render
   while (showChart.firstChild) {
