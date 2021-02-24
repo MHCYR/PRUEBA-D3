@@ -12,12 +12,13 @@ let chartWidth =
 let chartHeight = 500 - margins.top - margins.bottom;
 
 // DROPDOWNS
-// sort
-const sort = ["Alfabetico", "Ascendente", "Descendente"];
-renderDropdown(sort, "selection");
 //año
 let selectedYear = ["2010", "2011", "2012", "2013", "2014", "2015"];
 renderDropdown(selectedYear, "year");
+// sort
+const sort = ["Alfabetico", "Ascendente", "Descendente"];
+renderDropdown(sort, "selection");
+
 //estados
 const selectedState = data[dataRender].map((d) => d.estado);
 renderDropdown(selectedState, "state");
@@ -40,8 +41,15 @@ const resize_ob = new ResizeObserver(() => {
     margins.left -
     margins.right;
   if (windowWidth <= 480) {
-    margins = { top: 0, bottom: 10, left: 55, right: 15 };
-    chartHeight = 500 - margins.top - margins.bottom;
+    margins = { top: 5, bottom: 5, left: 55, right: 25 };
+    chartHeight =
+      document.querySelector("#chartContainer").offsetHeight -
+      margins.top -
+      margins.bottom;
+    chartWidth =
+      document.querySelector("#chartContainer").offsetWidth -
+      margins.left -
+      margins.right;
     renderHorizontal();
   } else {
     renderChart();
@@ -49,3 +57,7 @@ const resize_ob = new ResizeObserver(() => {
 });
 
 resize_ob.observe(chartDivWidth);
+// chartHeight =
+//       document.querySelector("#chartContainer").offsetHeight -
+//       margins.top -
+//       margins.bottom;

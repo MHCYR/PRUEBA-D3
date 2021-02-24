@@ -90,6 +90,7 @@ function renderChart() {
   showChart.appendChild(chartDiv);
 }
 
+//RENDER HORIZONTAL
 function renderHorizontal() {
   const chartDiv = document.createElement("div");
   const showChart = document.getElementById("chartContainer");
@@ -98,7 +99,7 @@ function renderHorizontal() {
   const yScale = d3
     .scaleBand()
     .domain(data[dataRender].map((d) => d.id))
-    .rangeRound([0, chartWidth])
+    .rangeRound([0, chartHeight])
     .padding(0.1);
 
   const xAxis = d3.axisTop().scale(xScale);
@@ -109,7 +110,8 @@ function renderHorizontal() {
     .select(chartDiv)
     .append("svg")
     .attr("width", chartWidth + margins.left + margins.right)
-    .attr("height", chartHeight + margins.top + margins.bottom);
+    .attr("height", chartHeight + margins.top + margins.bottom)
+    .classed("svg", true);
 
   const mainG = svg
     .append("g")
@@ -138,8 +140,8 @@ function renderHorizontal() {
     .enter()
     .append("text")
     .text((data) => data.idh)
-    .attr("x", (data) => xScale(data.idh)) // coloca el inicio del label a la mitad de la barra
-    .attr("y", (data) => yScale(data.id) + yScale.bandwidth() - 2)
+    .attr("x", (data) => xScale(data.idh) + 2) // coloca el inicio del label a la mitad de la barra
+    .attr("y", (data) => yScale(data.id) + yScale.bandwidth() - 3)
     .classed("label", true)
     .style("font-size", "10");
 

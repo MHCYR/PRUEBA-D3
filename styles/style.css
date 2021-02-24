@@ -1,14 +1,35 @@
-.chart-wrapper {
-  /* width: 700px;
-  height: 500px; */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
-  margin: 10px;
+body {
+  background-color: #e7e5df;
 }
-.chartContainer {
-  width: 600px;
-  height: 400px;
+select {
+  margin-right: 5px;
+}
+
+#chartContainer {
+  background-color: #1a535c;
 }
 
 .bars {
-  fill: aqua;
+  fill: #02a196;
+  transition: all 0.3;
+}
+.bars:hover {
+  fill-opacity: 0.7;
+}
+
+text {
+  fill: #ede6e3;
+}
+path,
+line {
+  stroke: #ede6e3;
+}
+
+a {
+  text-decoration: none;
+  color: #1a535c;
+}
+
+a:hover {
+  color: #02a196;
 }

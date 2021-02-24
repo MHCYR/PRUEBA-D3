@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gráfica IDH</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -14,21 +15,66 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
-    <main class="container d-flex flex-column align-items-center">
-      <div id="dropdown" class="d-flex justify-content-around col-sm-12"></div>
-      <div id="chartContainer" class="chart-wrapper col-12"></div>
-      <div id="stats" class="stats-wrapper">
-        <div id="average">
-          <p>El IDH promedio es: <span id="averageIDH"></span></p>
-        </div>
-        <div id="max">
-          <p>El IDH más alto es de: <span id="maxIDH"></span></p>
-        </div>
-        <div id="min">
-          <p>El IDH mas bajo es de: <span id="minIDH"></span></p>
+    <header class="container">
+      <h1>Prueba D3.js - Índice de Desarrollo Humano</h1>
+      <p>Esta aplicacion web se creo como un ejercicio de la librería D3.js, los datos de Índice de Desarrollo Humano (IDH) se asignan de manera aleatoria cada vez que se carga la página, no deben ser usados como reales. El ejercicio se realizo bajo los siguientes lineamientos</p>
+      <h2>Datos</h2>
+      <p>
+        Generar aleatoriamente los datos para las gráficas en cuanto se carga la página
+        <ol>
+          <li>Elegir un rango aleatorio de años (más de 5)</li>
+          <li>Cada año deberá tener datos para las 32 entidades</li>
+          <li>Dar a cada entidad y año un valor aleatorio al IDH entre 0 y 1 (usar decimales)</li>
+        </ol>
+      </p>
+      <h2>Gráfica</h2>
+      <p>
+        Generar la lógica haciendo uso de los siguientes atributos:
+        <ol>
+          <li>data: un Arreglo de objetos con los datos con los que se pintará la gráfica</li>
+          <li>selectedYear: año que se quiere visualizar</li>
+          <li>selectedState: Estado seleccionado -> destacar la barra de este estado con un color distinto</li>
+          <li>sort: forma de ordenar los datos</li>
+        </ol>
+      </p>
+      <h2>UX</h2>
+      <p>
+        Hacer la interfaz responsiva utilizando Materialize o Bootstrap.
+
+La gráfica debe redibujarse cuando cambie el estado seleccionado, el año o la forma de ordenamiento, sin necesidad de botones adicionales.
+      </p>
+    </header>
+    <main class="container col-12 pb-1 pb-lg-5">
+      <h2>Resultado</h2>
+      <div id="dropdown" class="mb-1 d-flex flex-column flex-md-row"></div>
+      <div
+        class="chart-stats d-flex col-12 flex-column align-items-center flex-lg-row align-items-lg-start"
+      >
+        <div
+          id="chartContainer"
+          class="chart-wrapper col-12 col-lg-10 rounded-3"
+        ></div>
+        <div
+          id="stats"
+          class="stats-wrapper d-flex flex-column col-lg-2 mt-2 ms-2 align-items-center"
+        >
+          <h3 id="selectedState">Estado</h3>
+          <div class="d-flex flex-column flex-sm-row flex-lg-column">
+            <div class="me-2 me-lg-0 px-md-2 px-lg-0" id="average">
+              <p>IDH promedio: <span id="averageIDH">0</span></p>
+            </div>
+            <div class="me-2 me-lg-0 px-md-2 px-lg-0" id="max">
+              <p>IDH más alto: <span id="maxIDH">0</span></p>
+            </div>
+            <div class="me-2 me-lg-0 px-md-2 px-lg-0" id="min">
+              <p>IDH más bajo: <span id="minIDH">0</span></p>
+            </div>
+          </div>
+          <a href="https://github.com/MHCYR/PRUEBA-D3"target="_blank" class="fs-1"><i class="fab fa-github"></i></a>
         </div>
       </div>
     </main>
+     
     <!-- SCRIPTS -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"

@@ -13,13 +13,33 @@ function dropdownSort() {
       return d3.ascending(a.estado, b.estado);
     });
   }
-  renderChart();
+  let windowWidth = document.querySelector("main").clientWidth;
+  if (windowWidth <= 480) {
+    margins = { top: 5, bottom: 5, left: 55, right: 25 };
+    chartHeight =
+      document.querySelector("#chartContainer").offsetHeight -
+      margins.top -
+      margins.bottom;
+    renderHorizontal();
+  } else {
+    renderChart();
+  }
 }
 
 function changeYear() {
   const selectedOption = d3.select(this).node().value;
   dataRender = selectedYear.indexOf(selectedOption);
-  renderChart();
+  let windowWidth = document.querySelector("main").clientWidth;
+  if (windowWidth <= 480) {
+    margins = { top: 5, bottom: 5, left: 55, right: 25 };
+    chartHeight =
+      document.querySelector("#chartContainer").offsetHeight -
+      margins.top -
+      margins.bottom;
+    renderHorizontal();
+  } else {
+    renderChart();
+  }
 }
 
 // Mejorar para no hacer un if por cada caso
@@ -31,8 +51,8 @@ function paintState() {
       stateID = `#${element.id}`;
     }
   });
-  d3.selectAll(".bars").style("fill", "aqua");
-  d3.select(stateID).style("fill", "red");
+  d3.selectAll(".bars").style("fill", "#02A196");
+  d3.select(stateID).style("fill", "#DF8601");
   idhStats(selectedOption);
 }
 
@@ -54,6 +74,7 @@ function idhStats(node) {
   averageIDH = average(stateIDH).toFixed(2);
   maxIDH = Math.max(...stateIDH);
   minIDH = Math.min(...stateIDH);
+  d3.select("#selectedState").text(node);
   d3.select("#averageIDH").text(averageIDH);
   d3.select("#maxIDH").text(maxIDH);
   d3.select("#minIDH").text(minIDH);
