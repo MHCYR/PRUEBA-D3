@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body>
-    <header class="container">
+    <header class="container py-2">
       <h1>Prueba D3.js - Índice de Desarrollo Humano</h1>
       <p>Esta aplicacion web se creo como un ejercicio de la librería D3.js, los datos de Índice de Desarrollo Humano (IDH) se asignan de manera aleatoria cada vez que se carga la página, no deben ser usados como reales. El ejercicio se realizo bajo los siguientes lineamientos</p>
       <h2>Datos</h2>
@@ -58,7 +58,7 @@ La gráfica debe redibujarse cuando cambie el estado seleccionado, el año o la 
           id="stats"
           class="stats-wrapper d-flex flex-column col-lg-2 mt-2 ms-2 align-items-center"
         >
-          <h3 id="selectedState">Estado</h3>
+          <h3 id="selectedState" class="me-2 me-lg-0 px-md-2 px-lg-0">Estado</h3>
           <div class="d-flex flex-column flex-sm-row flex-lg-column">
             <div class="me-2 me-lg-0 px-md-2 px-lg-0" id="average">
               <p>IDH promedio: <span id="averageIDH">0</span></p>

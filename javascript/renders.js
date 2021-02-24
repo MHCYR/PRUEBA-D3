@@ -88,6 +88,8 @@ function renderChart() {
     showChart.firstChild.remove();
   }
   showChart.appendChild(chartDiv);
+  // Hace que el estado seleccionado se quede de distinto color aunque el tamaño de la pantalla
+  paintState();
 }
 
 //RENDER HORIZONTAL
@@ -150,4 +152,7 @@ function renderHorizontal() {
     showChart.firstChild.remove();
   }
   showChart.appendChild(chartDiv);
+
+  // Hace que el estado seleccionado se quede de distinto color aunque el tamaño de la pantalla
+  paintState();
 }

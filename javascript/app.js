@@ -20,8 +20,9 @@ const sort = ["Alfabetico", "Ascendente", "Descendente"];
 renderDropdown(sort, "selection");
 
 //estados
-const selectedState = data[dataRender].map((d) => d.estado);
-renderDropdown(selectedState, "state");
+const states = data[dataRender].map((d) => d.estado);
+renderDropdown(states, "state");
+let selectedState = d3.select("#state").node().value;
 
 // Dropdowns events listeners
 d3.select("#selection").on("change", dropdownSort);

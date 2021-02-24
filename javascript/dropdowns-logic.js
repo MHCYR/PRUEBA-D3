@@ -21,8 +21,10 @@ function dropdownSort() {
       margins.top -
       margins.bottom;
     renderHorizontal();
+    paintState();
   } else {
     renderChart();
+    paintState();
   }
 }
 
@@ -37,23 +39,26 @@ function changeYear() {
       margins.top -
       margins.bottom;
     renderHorizontal();
+    paintState();
   } else {
     renderChart();
+    paintState();
   }
 }
 
 // Mejorar para no hacer un if por cada caso
 function paintState() {
-  const selectedOption = d3.select(this).node().value;
+  selectedState = d3.select("#state").node().value;
+  console.log(selectedState);
   let stateID;
   data[dataRender].forEach((element) => {
-    if (element.estado == selectedOption) {
+    if (element.estado == selectedState) {
       stateID = `#${element.id}`;
     }
   });
   d3.selectAll(".bars").style("fill", "#02A196");
   d3.select(stateID).style("fill", "#DF8601");
-  idhStats(selectedOption);
+  idhStats(selectedState);
 }
 
 //Recopila los datos de IDH del estado seleccionado
