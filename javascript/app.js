@@ -18,7 +18,7 @@ renderDropdown(selectedYear, "year");
 // sort
 const sort = ["Alfabetico", "Ascendente", "Descendente"];
 renderDropdown(sort, "selection");
-
+let selectedSort = d3.select("#selection").node().value;
 //estados
 const states = data[dataRender].map((d) => d.estado);
 renderDropdown(states, "state");
@@ -58,7 +58,3 @@ const resize_ob = new ResizeObserver(() => {
 });
 
 resize_ob.observe(chartDivWidth);
-// chartHeight =
-//       document.querySelector("#chartContainer").offsetHeight -
-//       margins.top -
-//       margins.bottom;
