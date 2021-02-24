@@ -1,14 +1,14 @@
 function dropdownSort() {
-  const selectedOption = d3.select(this).node().value;
-  if (selectedOption == "Ascendente") {
+  selectedSort = d3.select("#selection").node().value;
+  if (selectedSort == "Ascendente") {
     data[dataRender].sort((a, b) => {
       return d3.ascending(a.idh, b.idh);
     });
-  } else if (selectedOption == "Descendente") {
+  } else if (selectedSort == "Descendente") {
     data[dataRender].sort((a, b) => {
       return d3.descending(a.idh, b.idh);
     });
-  } else if (selectedOption == "Alfabetico") {
+  } else if (selectedSort == "Alfabetico") {
     data[dataRender].sort((a, b) => {
       return d3.ascending(a.estado, b.estado);
     });
@@ -39,9 +39,11 @@ function changeYear() {
       margins.top -
       margins.bottom;
     renderHorizontal();
+    dropdownSort();
     paintState();
   } else {
     renderChart();
+    dropdownSort();
     paintState();
   }
 }
@@ -49,7 +51,6 @@ function changeYear() {
 // Mejorar para no hacer un if por cada caso
 function paintState() {
   selectedState = d3.select("#state").node().value;
-  console.log(selectedState);
   let stateID;
   data[dataRender].forEach((element) => {
     if (element.estado == selectedState) {
