@@ -1,4 +1,4 @@
-//Creacion del dropdown
+//Creates a dropdown, recives the options of the dropdown as an array and the HTML id as a string.
 function renderDropdown(options, id) {
   d3.select("#dropdown")
     .append("select")
@@ -11,12 +11,12 @@ function renderDropdown(options, id) {
     .text((d) => d);
 }
 
-// Render de la gráfica
+// Horizontal chart render
 function renderChart() {
   const chartDiv = document.createElement("div");
   const showChart = document.getElementById("chartContainer");
 
-  // ESCALAS
+  // SCALES
   const xScale = d3
     .scaleBand()
     .domain(data[dataRender].map((d) => d.estado))
@@ -28,26 +28,26 @@ function renderChart() {
     .domain([0, 1]) //d3.max(data[0], (d) => d.idh)
     .range([chartHeight, 0]);
 
-  // EJES
+  // AXIS
   const xAxis = d3.axisBottom().scale(xScale);
   const yAxis = d3.axisLeft().scale(yScale);
 
-  //Crear SVG
+  //CREATE SVG
   const svg = d3
     .select(chartDiv)
     .append("svg")
     .attr("width", chartWidth + margins.left + margins.right)
     .attr("height", chartHeight + margins.top + margins.bottom);
 
-  // Grupo principal de SVG
+  // mainG groups all the elements of the svg
   const mainG = svg
     .append("g")
     .attr("transform", `translate(${margins.left}, ${margins.top})`);
 
-  // Grupo por barra de svg
+  //  g is used to wrap each element of the array (rects, labels, axis)
   const g = mainG.selectAll("g").data(data[dataRender]).enter().append("g");
 
-  //Crear barras de la grafica
+  //Creates the bars of the chart
   g.append("rect")
     .attr("class", "bars")
     .attr("x", (d) => xScale(d.estado))
@@ -57,7 +57,7 @@ function renderChart() {
     .attr("id", (d) => d.id)
     .append("text");
 
-  // Etiquetas del los ejes
+  // Axis labels
   mainG
     .append("g")
     .call(xAxis)
@@ -70,7 +70,7 @@ function renderChart() {
 
   mainG.append("g").call(yAxis);
 
-  // Etiquetas de las barras
+  // Bars value labels
   mainG
     .selectAll(".label")
     .data(data[dataRender], (data) => data.estado)
@@ -88,11 +88,11 @@ function renderChart() {
     showChart.firstChild.remove();
   }
   showChart.appendChild(chartDiv);
-  // Hace que el estado seleccionado se quede de distinto color aunque el tamaño de la pantalla
+  // Mantains the color of the selected state whe the chart is re-rendered
   paintState();
 }
 
-//RENDER HORIZONTAL
+//Horizontal Render
 function renderHorizontal() {
   const chartDiv = document.createElement("div");
   const showChart = document.getElementById("chartContainer");
@@ -104,10 +104,8 @@ function renderHorizontal() {
     .rangeRound([0, chartHeight])
     .padding(0.1);
 
-  const xAxis = d3.axisTop().scale(xScale);
   const yAxis = d3.axisLeft().scale(yScale);
 
-  //Crear SVG
   const svg = d3
     .select(chartDiv)
     .append("svg")
@@ -121,7 +119,7 @@ function renderHorizontal() {
 
   const g = mainG.selectAll("g").data(data[dataRender]).enter().append("g");
 
-  //Crear barras de la grafica
+  // Chart Bars
   g.append("rect")
     .attr("class", "bars")
     .attr("x", 0)
@@ -131,8 +129,7 @@ function renderHorizontal() {
     .attr("id", (d) => d.id)
     .append("text");
 
-  //Axis
-  // mainG.append("g").call(xAxis);
+  // Axis
   mainG.append("g").call(yAxis);
 
   // bar labels
@@ -153,6 +150,5 @@ function renderHorizontal() {
   }
   showChart.appendChild(chartDiv);
 
-  // Hace que el estado seleccionado se quede de distinto color aunque el tamaño de la pantalla
   paintState();
 }

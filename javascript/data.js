@@ -1,6 +1,8 @@
+//Random IDH returns a number of two digits between 0 and 1
 let randomIDH = () => Math.round(Math.random() * (100 - 1) + 1) / 100;
 
 // DATA
+//Data was organized by year in an array of objects, each object represents a state
 const data2010 = [
   { id: "AGS", año: 2010, estado: "Aguascalientes", idh: randomIDH() },
   { id: "BC", año: 2010, estado: "Baja California", idh: randomIDH() },

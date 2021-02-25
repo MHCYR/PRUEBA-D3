@@ -1,3 +1,5 @@
+// Sort
+// Is activated when the selection from the dropdown change, the functions sorts the data of the selected year
 function dropdownSort() {
   selectedSort = d3.select("#selection").node().value;
   if (selectedSort == "Ascendente") {
@@ -28,6 +30,8 @@ function dropdownSort() {
   }
 }
 
+//Change Year
+//Is activated when the selection from the years-dropdown change, takes the value from the selected year and changes the value of dataRender
 function changeYear() {
   const selectedOption = d3.select(this).node().value;
   dataRender = selectedYear.indexOf(selectedOption);
@@ -48,7 +52,7 @@ function changeYear() {
   }
 }
 
-// Mejorar para no hacer un if por cada caso
+// paintState receives the name of the state from the dropdown, search the id of the selected state and saves it as a string, then the id is used with d3 to change the color of the bar in the chart, finally calls idhStats()
 function paintState() {
   selectedState = d3.select("#state").node().value;
   let stateID;
@@ -62,7 +66,7 @@ function paintState() {
   idhStats(selectedState);
 }
 
-//Recopila los datos de IDH del estado seleccionado
+// Recieves the name of the selected state as parameter then searchs for the IDH value per year and stores it in an array, then use the array to calculate the main, max and min
 function idhStats(node) {
   const selectedOption = node;
   const average = (arr) => arr.reduce((p, c) => p + c, 0) / arr.length;
