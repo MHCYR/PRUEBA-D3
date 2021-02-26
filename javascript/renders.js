@@ -139,7 +139,7 @@ function renderHorizontal() {
     .enter()
     .append("text")
     .text((data) => data.idh)
-    .attr("x", (data) => xScale(data.idh) + 2) // coloca el inicio del label a la mitad de la barra
+    .attr("x", (data) => xScale(data.idh) + 5)
     .attr("y", (data) => yScale(data.id) + yScale.bandwidth() - 3)
     .classed("label", true)
     .style("font-size", "10");

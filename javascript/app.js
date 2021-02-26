@@ -1,5 +1,5 @@
 //dataRender represents the index of the year that is going to be render
-let data = [data2010, data2011, data2012, data2013, data2014, data2015];
+let data = createData(2010, 2020, statesMX);
 let dataRender = 0;
 
 //MARGINS
@@ -18,7 +18,7 @@ const states = data[dataRender].map((d) => d.estado);
 renderDropdown(states, "state");
 let selectedState = d3.select("#state").node().value;
 // Year dropdown
-let selectedYear = ["2010", "2011", "2012", "2013", "2014", "2015"];
+// selectedYear = ["2010", "2011", "2012", "2013", "2014", "2015"];
 renderDropdown(selectedYear, "year");
 // Sort dropdown
 const sort = ["Alfabetico", "Ascendente", "Descendente"];
