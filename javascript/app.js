@@ -1,5 +1,5 @@
 //dataRender represents the index of the year that is going to be render
-let data = createData(2010, 2020, statesMX);
+let data = createData(2010, 2015, statesMX);
 let dataRender = 0;
 
 //MARGINS
