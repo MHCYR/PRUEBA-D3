@@ -59,8 +59,7 @@ const resize_ob = new ResizeObserver(() => {
       document.querySelector("#chartContainer").offsetHeight -
       margins.top -
       margins.bottom;
-    chartWidth = renderChart();
+    renderChart();
   }
 });
-
 resize_ob.observe(chartDivWidth);
