@@ -8,4 +8,4 @@ Se utilizó bootstrap para generar un sitio responsive.
 
 Las librerías fueron agregadas via CDN.
 
-Puedes ver el deploy [aquí](https://mohacyr-prueba-d3.netlify.app/)
+Puedes ver el resultado [aquí](https://mohacyr-prueba-d3.netlify.app/)
